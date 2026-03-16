@@ -1,0 +1,16 @@
+# 가상환경 무시
+venv/
+.venv/
+env/
+
+# 파이썬 캐시 무시
+__pycache__/
+*.py[cod]
+
+# YOLO/데이터셋 관련 (용량이 큰 경우)
+datasets/
+runs/
+*.pt
+
+# OS 설정 파일
+.DS_Store
