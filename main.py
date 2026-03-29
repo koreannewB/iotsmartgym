@@ -6,7 +6,7 @@
 import treadmill
 import towel_remaining
 import fitness_equipment
-
+import state
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
 import time
@@ -15,9 +15,7 @@ import threading
 app = FastAPI()
 from fastapi.staticfiles import StaticFiles
 app.mount("/static", StaticFiles(directory="static"), name="static")
-@app.get('/')
-async def index():
-    return FileResponse('templates/index.html')
+
 # 각 기능 3개가 동시에 작동하도록 스레드생성
 threadtreadmill = threading.Thread(target=treadmill.trail_detect_run)
 # threadtowel = threading.Thread(target=towel_remaining.run)
@@ -34,3 +32,14 @@ threadtreadmill.start()
 
 
 # 이파일실행될떄만 실행되도록 
+@app.get('/')
+async def index():
+    return FileResponse('templates/index.html')
+@app.get("/TMdata")
+async def tm_data():
+    return {
+        "Tmn1": state.TREADMILL[1],
+        "Tmn2": state.TREADMILL[2],
+        "Tmn3": state.TREADMILL[3],
+        "Tmn4": state.TREADMILL[4]
+    }

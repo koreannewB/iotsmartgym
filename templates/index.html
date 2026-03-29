@@ -86,7 +86,9 @@
     <div class="title"><h1> [런닝머신1][런닝머신2][런닝머신3][런닝머신4]</h1></div>
     <div class="treadmill_mainview">
         <div class="box"id="box-1">
-            <div class="human"><img id="tm1" alt="Human"></div>
+            <div class="human"><img id="tm1"
+                
+                ></div>
             <div class="trail"><img id="person1"src="../static/img/trail.png" alt="Trail"></div>   
         </div>
         <div class="box"id="box-2">
@@ -126,24 +128,18 @@
         })
     </script>
     <script>
-    async function getT_hData(){
-        const res = await fetch('/TMdata')
-        const data = await res.json()
-        console.log(data)
-        document.getElementById("tm1").src  = data.Tmn1
-        document.getElementById("tm2").src  = data.Tmn2
-        document.getElementById("tm3").src = data.Tmn3
-        document.getElementById("tm4").src = data.Tmn4
-        window.onload = function(){
-        
-        
-        }   
-    setInterval(getT_hData,1000)    
-     
-    
-        
-    }
+        async function loadData(){
+            const res = await fetch('/TMdata')
+            const data = await res.json()
+            console.log(data)
+            document.getElementById("tm1").src  = data.Tmn1
+            document.getElementById("tm2").src  = data.Tmn2
+            document.getElementById("tm3").src = data.Tmn3
+            document.getElementById("tm4").src = data.Tmn4
 
+        }
+        setInterval(loadData, 1000)
+        window.onload = loadData
     </script>
     
    

@@ -1,7 +1,7 @@
 import time
 from fastapi import FastAPI,Request
 from fastapi.responses import FileResponse
-
+import state
 from ultralytics import YOLO
 
 
@@ -9,18 +9,14 @@ from ultralytics import YOLO
 model = YOLO('yolov8n.pt')
 # 각 구역별 타이머 (여기서는 2번만 예시)
 box_timers = {1: None, 2: None, 3: None, 4: None}
-Tmn = {
-    1: "/static/img/human.png",
-    2: "/static/img/human.png",
-    3: "/static/img/human.png",
-    4: "/static/img/human.png"
-}
+
 def trail_detect_run():
     print("런닝머신감지기능작동")
     #조건 넣는 구간!!!!
-    print(Tmn[1])
+    print(state.TREADMILL[1])
+    #지정 
     condition = {1: True, 2: False, 3: True, 4: True}
-
+    
 
 
     while True:
@@ -29,26 +25,15 @@ def trail_detect_run():
     #
     #
     #
-        for trmil in range(1, 5):
-            if condition[trmil]:
-                Tmn[trmil] = "/static/img/onhuman.png"
+        for i in range(1, 5):
+            if condition[i]:
+                state.TREADMILL[i] = "/static/img/onhuman.png"
             else:
-                Tmn[trmil] = "/static/img/offhuman.png"
-
+                state.TREADMILL[i]= "/static/img/offhuman.png"
+            
         time.sleep(1)
         print("변경")
 
 
 
        
-
-@app.get('/TMdata')
-async def get_tm_data():
-    return {
-        "Tmn1": Tmn[1],
-        "Tmn2": Tmn[2],
-        "Tmn3": Tmn[3],
-        "Tmn4": Tmn[4]
-    }
-
- 
