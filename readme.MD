@@ -1,3 +1,18 @@
+1. 라즈베리파이 GND부터 연결
+2.흔들어서 뽑지말기
+
+
+뺄떄는 파워먼저
+
+
+
+
+
+
+
+
+
+
 가상환경 만들기
 python -m venv venv
 and python3 -m venv venv
